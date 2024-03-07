@@ -1,3 +1,11 @@
+let notesArr = []
+
+function getAddBtn(text){
+    let buttonAdd = document.createElement("button")
+    buttonAdd.textContent= text
+    return buttonAdd
+}
+
 function getCard(){
     let card = {
         title: "Название" ,
@@ -5,7 +13,7 @@ function getCard(){
         desc: "Описание карточки"
     }
 
-    let cardElement = document.createElement("div")
+    let cardElement = document.createElement("li")
     let cardImg = document.createElement("img")
     let cardTitle = document.createElement("h2")
     let cardDesc = document.createElement("p")
@@ -28,6 +36,39 @@ function getCard(){
 
     cardElement.append(cardImg, cardTitle, cardDesc, cardImportantBtn, cardRemoveBtn)
 
-    document.body.append(cardElement)
+    return cardElement
 }
 
+function getList(){
+    let ul = document.createElement("ul")
+    ul.classList.add("list")
+    return ul
+}
+
+let list = getList()
+
+let addBtn = getAddBtn("Добавить новую замтку ")
+
+addBtn.onclick = function (){
+    let titleValue = prompt("Введите название заметки")
+    let imgValue = prompt("Введите путь заметки")
+    let decsValue = prompt("Введите описание заметки")
+
+    let newNoteObj ={
+        title: titleValue,
+        img: imgValue,
+        decs: decsValue
+    }
+
+    notesArr.push(newNoteObj)
+
+    render(notesArr)
+}
+
+function render(arrNotes){
+    for(let i = 0; i<arrNotes.length; i++){
+        console.log(arrNotes[i])
+    }
+}
+
+document.body.append(addBtn, list)
